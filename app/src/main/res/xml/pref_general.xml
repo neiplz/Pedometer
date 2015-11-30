@@ -1,0 +1,38 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:key="sync"
+        android:title="@string/pref_title_sync"
+        android:summary="@string/pref_summary_sync"
+        android:defaultValue="true" />
+
+    <EditTextPreference
+        android:key="goal"
+        android:defaultValue="@string/pref_default_goal"
+        android:selectAllOnFocus="true"
+        android:title="@string/pref_title_goal"
+        android:summary="@string/pref_summary_goal"
+        android:inputType="number"
+        android:singleLine="true"
+        android:maxLines="1" />
+
+    <EditTextPreference
+        android:key="stride"
+        android:defaultValue="@string/pref_default_step_length"
+        android:selectAllOnFocus="true"
+        android:title="@string/pref_title_step_length"
+        android:inputType="number"
+        android:singleLine="true"
+        android:maxLines="1" />
+
+    <EditTextPreference
+        android:key="sensitivity"
+        android:title="@string/pref_title_sensitivity"
+        android:defaultValue="@string/pref_default_sensitivity"
+        android:selectAllOnFocus="true"
+        android:inputType="numberDecimal"
+        android:singleLine="true"
+        android:maxLines="1" />
+
+
+</PreferenceScreen>

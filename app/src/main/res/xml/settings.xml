@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:key="goal"
+        android:title="Goal"/>
+    <Preference
+        android:key="stepsize"
+        android:title="Step size"/>
+    <Preference
+        android:key="account"
+        android:summary="Signed in as %s"
+        android:title="Account"/>
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="notification"
+        android:title="Show notification"/>
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="pause_on_power"
+        android:title="Pause while charging"
+        android:summary="Pause Pedometer while device is charging"/>
+
+    <Preference
+        android:key="export"
+        android:summary="Save your data in a .csv file"
+        android:title="Export/Backup"/>
+    <Preference
+        android:key="import"
+        android:summary="Imports previously saved data"
+        android:title="Import/Restore"/>
+
+</PreferenceScreen>
