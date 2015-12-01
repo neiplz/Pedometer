@@ -40,8 +40,9 @@ public class HistoryActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "只能来点随机数据了", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                updateChart();
             }
         });
 
@@ -67,7 +68,6 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void updateChart() {
 
-        Log.d(LOG_TAG,"绘图开始");
         Calendar yesterday = Calendar.getInstance();
         yesterday.setTimeInMillis(DateUtils.getToday());
         yesterday.add(Calendar.DAY_OF_YEAR, -1);
@@ -81,19 +81,7 @@ public class HistoryActivity extends AppCompatActivity {
 
         int steps;
         int goal = 10000;
-        float distance;
-        float stepsize = Locale.getDefault() == Locale.US ? 2.5f : 75f;
-        boolean stepsize_cm = true;
         boolean showSteps = true;
-
-//        if (!showSteps) {
-//            // load some more settings if distance is needed
-//            SharedPreferences prefs =
-//                    getActivity().getSharedPreferences("pedometer", Context.MODE_MULTI_PROCESS);
-//            stepsize = prefs.getFloat("stepsize_value", Fragment_Settings.DEFAULT_STEP_SIZE);
-//            stepsize_cm = prefs.getString("stepsize_unit", Fragment_Settings.DEFAULT_STEP_UNIT)
-//                    .equals("cm");
-//        }
 
         mBarChart.setShowDecimal(true); // show decimal in distance view only
 
@@ -107,13 +95,6 @@ public class HistoryActivity extends AppCompatActivity {
                 if (showSteps) {
                     bm.setValue(steps);
                 } else {
-//                    distance = steps * stepsize;
-//                    if (stepsize_cm) {
-//                        distance /= 100000;
-//                    } else {
-//                        distance /= 5280;
-//                    }
-//                    distance = Math.round(distance * 1000) / 1000f; // 3 decimals
                     bm.setValue(steps);
                 }
                 mBarChart.addBar(bm);
@@ -121,20 +102,17 @@ public class HistoryActivity extends AppCompatActivity {
             yesterday.add(Calendar.DAY_OF_YEAR, 1);
         }
         if (mBarChart.getData().size() > 0) {
-            mBarChart.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-//                    Dialog_Statistics.getDialog(getActivity(), since_boot).show();
-                }
-            });
+//            mBarChart.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(final View v) {
+////                    Dialog_Statistics.getDialog(getActivity(), since_boot).show();
+//                }
+//            });
             mBarChart.startAnimation();
-            Log.d(LOG_TAG, "绘图=======绘图");
         } else {
             mBarChart.setVisibility(View.GONE);
-            Log.d(LOG_TAG, "绘图=======消失");
         }
 //        db.close();
-        Log.d(LOG_TAG,"绘图结束");
     }
 
 
