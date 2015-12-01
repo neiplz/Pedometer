@@ -12,7 +12,7 @@ public class WelcomeActivity extends Activity {
 
     private static final String LOG_TAG = "WelcomeActivity";
 
-//    TextView tvVersion;
+    TextView tvVersion;
     TextView tvProgress;// 下载进度展示
 
     // 服务器返回的信息
@@ -29,16 +29,30 @@ public class WelcomeActivity extends Activity {
         final View view = View.inflate(this, R.layout.activity_welcome,null);
         setContentView(view);
 
-//        tvVersion = (TextView) findViewById(R.id.tv_version);
+        tvVersion = (TextView) findViewById(R.id.tv_version);
         tvProgress = (TextView) findViewById(R.id.tv_progress);
+
+        try {
+            tvVersion.setText("当前版本：" + getVersionName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // 渐变展示启动屏
         AlphaAnimation alpha = new AlphaAnimation(0.5f,1.0f);
-        alpha.setDuration(50000);
+        alpha.setDuration(3000);
 
         view.startAnimation(alpha);
         alpha.setAnimationListener(new WelcomeAnimationListener());
 
+    }
+    
+    public String getVersionName() throws Exception{
+        PackageManager packageManager = getPackageManager();
+        //0代表是获取版本信息
+        PackageInfo packInfo = packageManager.getPackageInfo(getPackageName(),0);
+        String version = packInfo.versionName;
+        return version;
     }
 
     @Override
@@ -50,12 +64,12 @@ public class WelcomeActivity extends Activity {
 
         @Override
         public void onAnimationStart(Animation animation) {
-            swichToActivity();
+            
         }
 
         @Override
         public void onAnimationEnd(Animation animation) {
-
+            swichToActivity();
         }
 
         @Override
