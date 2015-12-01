@@ -6,10 +6,13 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+/**
+* algorithm from bagilevi
+*/
 public class StepDetectorListener implements SensorEventListener {
 
 	public static int CURRENT_SETP = 0;
-	public static float SENSITIVITY = 10; // SENSITIVITY灵敏度
+	public static float SENSITIVITY = 10; // 灵敏度
 	private float mLastValues[] = new float[3 * 2];
 	private float mScale[] = new float[2];
 	private float mYOffset;
@@ -26,7 +29,7 @@ public class StepDetectorListener implements SensorEventListener {
 
 	public StepDetectorListener(Context context) {
 		super();
-		int h = 480;
+		int h = 480;  //出处？
 		mYOffset = h * 0.5f;
 		mScale[0] = -(h * 0.5f * (1.0f / (SensorManager.STANDARD_GRAVITY * 2)));
 		mScale[1] = -(h * 0.5f * (1.0f / (SensorManager.MAGNETIC_FIELD_EARTH_MAX)));
