@@ -6,22 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatImageButton;
 import android.text.TextUtils;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -32,7 +24,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +37,6 @@ import com.github.neiplz.pedometer.models.Step;
 import com.github.neiplz.pedometer.persistence.DatabaseHelper;
 import com.github.neiplz.pedometer.listeners.StepDetectorListener;
 import com.github.neiplz.pedometer.services.StepService;
-import com.github.neiplz.pedometer.utils.CompatUtils;
 import com.github.neiplz.pedometer.utils.Constants;
 import com.github.neiplz.pedometer.utils.DateUtils;
 import com.github.neiplz.pedometer.utils.NetworkUtils;
@@ -110,9 +100,6 @@ public class MainActivity extends AppCompatActivity
     FloatingActionButton mFabStart;
     FloatingActionButton mFabPause;
     FloatingActionButton mFabStop;
-
-    static final ColorStateList mColorStateListGrey = ColorStateList.valueOf(Color.parseColor("#757575"));
-    static final ColorStateList mColorStateListBlue = ColorStateList.valueOf(Color.parseColor("#1565c0"));
 
     private static int mStepToday = 0;
 
@@ -351,7 +338,6 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
 
         mEmail = mAppConfig.getProperties(Constants.KEY_USER_EMAIL);
-//        Log.d(LOG_TAG, "初始化时获得的email:" + mEmail);
 
         mStride = Integer.valueOf(mSharedPreferences.getString(Constants.KEY_PREF_STRIDE, Constants.DEFAULT_STRING_STRIDE));
 //        mSensitivity = Integer.valueOf(mSharedPreferences.getString(Constants.KEY_PREF_SENSITIVITY, Constants.DEFAULT_STRING_SENSITIVITY));
@@ -360,9 +346,6 @@ public class MainActivity extends AppCompatActivity
 
         mTvGoal.setText(String.valueOf(mGoal));
         mTvDuration.setText(String.valueOf(mStride));
-
-
-//        mCurrentStep = StepDetectorListener.CURRENT_SETP
 
         if (mHasLoggedIn) {
             Log.d(LOG_TAG, "用户已登录");
