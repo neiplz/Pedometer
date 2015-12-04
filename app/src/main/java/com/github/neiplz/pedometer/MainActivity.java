@@ -8,15 +8,20 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageButton;
 import android.text.TextUtils;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -41,6 +46,7 @@ import com.github.neiplz.pedometer.models.Step;
 import com.github.neiplz.pedometer.persistence.DatabaseHelper;
 import com.github.neiplz.pedometer.listeners.StepDetectorListener;
 import com.github.neiplz.pedometer.services.StepService;
+import com.github.neiplz.pedometer.utils.CompatUtils;
 import com.github.neiplz.pedometer.utils.Constants;
 import com.github.neiplz.pedometer.utils.DateUtils;
 import com.github.neiplz.pedometer.utils.NetworkUtils;
@@ -197,19 +203,9 @@ public class MainActivity extends AppCompatActivity
 
                 Toast.makeText(MainActivity.this, getString(R.string.tip_start), Toast.LENGTH_SHORT).show();
 
-                view.setEnabled(false);
-                mFabPause.setEnabled(true);
-                mFabStop.setEnabled(true);
-
-                if (Build.VERSION.SDK_INT <= 21) {
-//                    ((AppCompatImageButton) (ImageButton)(FloatingActionButton)view).setSupportBackgroundTintList(mColorStateListGrey);
-//                    ((AppCompatImageButton) (ImageButton) mFabPause).setSupportBackgroundTintList(mColorStateListBlue);
-//                    ((AppCompatImageButton) (ImageButton) mFabStop).setSupportBackgroundTintList(mColorStateListBlue);
-                } else {
-                    view.setBackgroundTintList(mColorStateListGrey);
-                    mFabPause.setBackgroundTintList(mColorStateListBlue);
-                    mFabStop.setBackgroundTintList(mColorStateListBlue);
-                }
+                view.setVisibility(View.INVISIBLE);
+                mFabPause.setVisibility(View.VISIBLE);
+                mFabStop.setVisibility(View.VISIBLE);
 
                 Log.d(LOG_TAG, "启用StepService");
 
@@ -226,19 +222,10 @@ public class MainActivity extends AppCompatActivity
 
                 Toast.makeText(MainActivity.this, getString(R.string.tip_pause), Toast.LENGTH_SHORT).show();
 
-                mFabStart.setEnabled(true);
-                view.setEnabled(false);
-                mFabStop.setEnabled(true);
 
-                if (Build.VERSION.SDK_INT <= 21) {
-//                    ((AppCompatImageButton) (ImageButton) mFabStart).setSupportBackgroundTintList(mColorStateListBlue);
-//                    ((AppCompatImageButton) (ImageButton)view).setSupportBackgroundTintList(mColorStateListGrey);
-//                    ((AppCompatImageButton) (ImageButton) mFabStop).setSupportBackgroundTintList(mColorStateListBlue);
-                } else {
-                    mFabStart.setBackgroundTintList(mColorStateListBlue);
-                    view.setBackgroundTintList(mColorStateListGrey);
-                    mFabStop.setBackgroundTintList(mColorStateListBlue);
-                }
+                mFabStart.setVisibility(View.VISIBLE);
+                view.setVisibility(View.INVISIBLE);
+                mFabStop.setVisibility(View.VISIBLE);
 
                 Log.d(LOG_TAG, "暂停StepService");
 
@@ -253,31 +240,24 @@ public class MainActivity extends AppCompatActivity
 
                 Toast.makeText(MainActivity.this, getString(R.string.tip_sttop), Toast.LENGTH_SHORT).show();
 
-                mFabStart.setEnabled(true);
-                mFabPause.setEnabled(false);
-                view.setEnabled(false);
-
-                if (Build.VERSION.SDK_INT <= 21) {
-//                    ((AppCompatImageButton) (ImageButton) mFabStart).setSupportBackgroundTintList(mColorStateListBlue);
-//                    ((AppCompatImageButton) (ImageButton) mFabPause).setSupportBackgroundTintList(mColorStateListGrey);
-//                    ((AppCompatImageButton) (ImageButton)view).setSupportBackgroundTintList(mColorStateListGrey);
-                } else {
-                    mFabStart.setBackgroundTintList(mColorStateListBlue);
-                    mFabPause.setBackgroundTintList(mColorStateListGrey);
-                    view.setBackgroundTintList(mColorStateListGrey);
-                }
+                mFabStart.setVisibility(View.VISIBLE);
+                mFabPause.setVisibility(View.INVISIBLE);
+                view.setVisibility(View.INVISIBLE);
 
                 Log.d(LOG_TAG, "停止StepService");
 
-                stopTask();
-                stopService(mStepServiceIntent);
+                if(isServiceRunning(StepService.class.getName())){
+                    Log.d(LOG_TAG, "StepService实际上正在运行");
+                    stopTask();
+                    stopService(mStepServiceIntent);
+                } else {
+                    Log.d(LOG_TAG, "StepService实际上已经关闭");
+                }
 
-//                Log.d(LOG_TAG, "当前步数：" + StepDetectorListener.CURRENT_SETP);
                 if(mHasLoggedIn){
                     String email = mAppConfig.getProperties(Constants.KEY_USER_EMAIL);
                     if(!TextUtils.isEmpty(email)){
                         mStepToday = mDatabaseHelper.updateSteps(email, DateUtils.getToday(), StepDetectorListener.CURRENT_SETP, 1);
-//                        Log.d(LOG_TAG, "当前总步数：" + mStepToday);
                     }
                 } else {
                     Toast.makeText(MainActivity.this, getString(R.string.error_records_save_failed), Toast.LENGTH_SHORT).show();

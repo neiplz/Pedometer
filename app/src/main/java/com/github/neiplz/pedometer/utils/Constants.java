@@ -40,12 +40,12 @@ public class Constants {
     public final static String DEFAULT_STRING_SENSITIVITY = "4.5";
     public final static String DEFAULT_STRING_GOAL = "10000";
 
-    public static final String URL_LOGIN_CHECK = "http://192.168.182.250:8080/user/loginCheck";
-    public static final String URL_USER_REGISTER = "http://192.168.182.250:8080/user/save";
-    public static final String URL_UPDATE_PASSWORD = "http://192.168.182.250:8080/user/updatePwd";
-    public static final String URL_LOAD_INFO = "http://192.168.182.250:8080/user/getByEmail";
-    public static final String URL_UPDATE_USER_INFO = "http://192.168.182.250:8080/user/updateAppUser";
-    public static final String URL_SYNC_PREF = "http://192.168.182.250:8080/pref/sync";
+//    public static final String URL_LOGIN_CHECK = "http://192.168.182.250:8080/user/loginCheck";
+//    public static final String URL_USER_REGISTER = "http://192.168.182.250:8080/user/save";
+//    public static final String URL_UPDATE_PASSWORD = "http://192.168.182.250:8080/user/updatePwd";
+//    public static final String URL_LOAD_INFO = "http://192.168.182.250:8080/user/getByEmail";
+//    public static final String URL_UPDATE_USER_INFO = "http://192.168.182.250:8080/user/updateAppUser";
+//    public static final String URL_SYNC_PREF = "http://192.168.182.250:8080/pref/sync";
 
 //    public static final String URL_LOGIN_CHECK = "http://192.168.1.100:8080/user/loginCheck";
 //    public static final String URL_USER_REGISTER = "http://192.168.1.100:8080/user/save";
@@ -54,12 +54,12 @@ public class Constants {
 //    public static final String URL_UPDATE_USER_INFO = "http://192.168.1.100:8080/user/updateAppUser";
 //    public static final String URL_SYNC_PREF = "http://192.168.1.100:8080/pref/sync";
 
-//    public static final String URL_LOGIN_CHECK = "http://122.193.135.162:8083/user/loginCheck";
-//    public static final String URL_USER_REGISTER = "http://122.193.135.162:8083/user/save";
-//    public static final String URL_UPDATE_PASSWORD = "http://122.193.135.162:8083/user/updatePwd";
-//    public static final String URL_LOAD_INFO = "http://122.193.135.162:8083/user/getByEmail";
-//    public static final String URL_UPDATE_USER_INFO = "http://122.193.135.162:8083/user/updateAppUser";
-//    public static final String URL_SYNC_PREF = "http://122.193.135.162:8083/pref/sync";
+    public static final String URL_LOGIN_CHECK = "http://122.193.135.162:8083/user/loginCheck";
+    public static final String URL_USER_REGISTER = "http://122.193.135.162:8083/user/save";
+    public static final String URL_UPDATE_PASSWORD = "http://122.193.135.162:8083/user/updatePwd";
+    public static final String URL_LOAD_INFO = "http://122.193.135.162:8083/user/getByEmail";
+    public static final String URL_UPDATE_USER_INFO = "http://122.193.135.162:8083/user/updateAppUser";
+    public static final String URL_SYNC_PREF = "http://122.193.135.162:8083/pref/sync";
 
 
     public static final int REQUEST_CODE_EDIT_PASSWORD = 91;

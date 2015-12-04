@@ -2,6 +2,8 @@ package com.github.neiplz.pedometer;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -40,13 +42,13 @@ public class WelcomeActivity extends Activity {
 
         // 渐变展示启动屏
         AlphaAnimation alpha = new AlphaAnimation(0.5f,1.0f);
-        alpha.setDuration(3000);
+        alpha.setDuration(5000);
 
         view.startAnimation(alpha);
         alpha.setAnimationListener(new WelcomeAnimationListener());
 
     }
-    
+
     public String getVersionName() throws Exception{
         PackageManager packageManager = getPackageManager();
         //0代表是获取版本信息
@@ -64,7 +66,7 @@ public class WelcomeActivity extends Activity {
 
         @Override
         public void onAnimationStart(Animation animation) {
-            
+
         }
 
         @Override
